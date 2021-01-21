@@ -15,6 +15,7 @@ const HeaderWrapper = styled.div`
 
 const Logo = styled.img`
   height: 64px;
+  margin: 10px;
   pointer-events: none;
 `;
 
