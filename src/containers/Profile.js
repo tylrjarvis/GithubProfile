@@ -24,27 +24,36 @@ class Profile extends Component {
     }
 
     async componentDidMount() {
-        const profile = await fetch('https://api.github.com/users/tylrjarvis');
-        const profileJSON = await profile.json();
+        try {
+            const profile = await fetch('https://api.github.com/users/tylrjarvis');
+            const profileJSON = await profile.json();
 
-        if(profileJSON){
-            const repositories = await fetch(profileJSON.repos_url);
-            const repositoriesJSON = await repositories.json();
+            if(profileJSON){
+                const repositories = await fetch(profileJSON.repos_url);
+                const repositoriesJSON = await repositories.json();
 
 
+                this.setState({
+                    data: profileJSON,
+                    repositories: repositoriesJSON,
+                    loading: false,
+                    error: '',
+                })
+            }
+        }
+        catch(error) {
             this.setState({
-                data: profileJSON,
-                repositories: repositoriesJSON,
                 loading: false,
+                error: error.message,
             })
         }
     }
 
     render() {
-        const { data, loading, repositories} = this.state;
+        const { data, loading, repositories, error} = this.state;
 
-        if(loading){
-            return <div>Loading...</div>
+        if(loading || error){
+            return <div>{loading ? 'Loading...' : error}</div>;
         }
 
         const items = [
@@ -67,7 +76,7 @@ class Profile extends Component {
         })
 
         projects[0].description = "Cyber Physical Game Using Unity3D, Blender, and C#";
-
+        projects[1].description = "Github Projects Web-App (The Web-App you are viewing!)";
         return (
             <ProfileWrapper>
                 <Avatar src={data.avatar_url} alt='avatar' />
