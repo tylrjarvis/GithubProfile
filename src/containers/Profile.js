@@ -65,8 +65,8 @@ class Profile extends Component {
 
         const projects = repositories.map( repository => ({
             label: repository.name,
+            description: repository.description,
             value: <Link url={repository.html_url} title='Github URL' />,
-            description: "",
         }))
 
         const projects2 = ({
@@ -75,8 +75,6 @@ class Profile extends Component {
             description: "Data Mining Project Using WEKA and Python3",
         })
 
-        projects[0].description = "Cyber Physical Game Using Unity3D, Blender, and C#";
-        projects[1].description = "Github Projects Web-App (The Web-App you are viewing!)";
         return (
             <ProfileWrapper>
                 <Avatar src={data.avatar_url} alt='avatar' />
