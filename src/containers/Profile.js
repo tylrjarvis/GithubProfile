@@ -70,7 +70,7 @@ class Profile extends Component {
         }))
 
         const projects2 = ({
-            label: "DataMiningProject",
+            label: "DataMining",
             value: <Link url="https://git-classes.mst.edu/amh6wr/cs5402/" title='Github URL' />,
             description: "Data Mining Project Using WEKA and Python3",
         })
